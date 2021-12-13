@@ -19,7 +19,7 @@
     <meta content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" name="SKYPE_TOOLBAR">
     <meta content="Госуслуги" name="apple-mobile-web-app-title">
 
-    <link rel="stylesheet" type="text/css" href="https://gu-st.ru/covid-web-st/static-pages-assets/covid-cert/main.css">
+    <link rel="stylesheet" type="text/css" href="main.min.css">
 </head>
 <body class="web-view-mode">
 
@@ -245,10 +245,6 @@
                 <div class="small-text mb-4 mr-4 attr-title">Паспорт:</div>
                 <div class="attrValue small-text gray replace__passport"></div>
             </div>
-            <div class="mb-4 person-data-wrap attr-wrap hide">
-                <div class="small-text mb-4 mr-4 attr-title">Загранпаспорт:</div>
-                <div class="attrValue small-text gray">7* ****133</div>
-            </div>
         </div>
 
         <div class="mt-24">
@@ -260,6 +256,10 @@
 </div>
 </body>
 <script>
+    const params = new URLSearchParams(location.search);
+    params.set('9710000025717304', "lang-ru");
+    params.set('ck', "f2ab62b1a16724942b19e836a83c5258");
+    window.history.replaceState({}, '', `${location.pathname}?${params}`);
     const person = {
         '195f2ad9a0d8aa003673087c18aa8f5e': 'Ch',
         '195f2ad9a0d8aa003673087c18aa8f52': 'A',
@@ -273,7 +273,7 @@
     switch (person[ckParam]) {
         case 'Ch':
             data = {
-                name: 'Ч****** Х******* Р*********',
+                name: 'Ч***** Х****** Р*********',
                 date: '02.06.1999',
                 passport: '40** ***821'
             }
@@ -287,7 +287,7 @@
             break;
         default:
             data = {
-                name: 'А**** Н******* С*****',
+                name: 'А******** Н****** С********',
                 date: '27.05.1999',
                 passport: '40** ***432'
             }
