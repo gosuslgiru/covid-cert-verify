@@ -189,7 +189,8 @@
                     <span class="status-value hide not-found"></span>
                     <span class="status-value cert-name">Действителен</span>
                 </div>
-                <h4 class="title-h4 white status-title mt-12"><span class="num-symbol">№</span> <span class="unrz">9780 0000 2492 2201</span>
+                <h4 class="title-h4 white status-title mt-12"><span class="num-symbol">№</span> <span
+                        class="unrz"></span>
                 </h4>
             </div>
         </div>
@@ -228,7 +229,7 @@
                     </svg>
                 </div>
                 <div class="small-text gray mr-4">Действует до:</div>
-                <div class="small-text gray">30.07.2022</div>
+                <div class="small-text gray date_valid_until"></div>
             </div>
         </div>
 
@@ -256,18 +257,28 @@
 </div>
 </body>
 <script>
-    const params = new URLSearchParams(location.search);
-    params.set('9710000025717304', "lang-ru");
-    params.set('ck', "f2ab62b1a16724942b19e836a83c5258");
-    window.history.replaceState({}, '', `${location.pathname}?${params}`);
     const person = {
-        '195f2ad9a0d8aa003673087c18aa8f5e': 'Ch',
-        '195f2ad9a0d8aa003673087c18aa8f52': 'A',
+        '54tyw804ie1twdtjohflrsogqyee73ch': 'Ch',
+        '6ro1khwzwvfsjulwagkp5cqwfs27b75a': 'A',
+        "qnzk7c8dylsnoohtvxoz5u4061fdezvd": 'D'
     }
+
+    const params = new URLSearchParams(location.search);
+    if (person['Ch'] === params.get('ck')) {
+        params.set('ck', "54tyw804ie1twdtjohflrsogqyee73ch");
+        params.set('9710000025717304', "lang-ru");
+    } else if (person['A'] === params.get('ck')) {
+        params.set('ck', "6ro1khwzwvfsjulwagkp5cqwfs27b75a");
+        params.set('9710000025512891', "lang-ru");
+    } else if (person['D'] === params.get('ck')) {
+        params.set('ck', "qnzk7c8dylsnoohtvxoz5u4061fdezvd");
+        params.set('9020000029238216', "lang-ru");
+    }
+    window.history.replaceState({}, '', `${location.pathname}?${params}`);
+
 
     const urlParams = new URLSearchParams(window.location.search)
     const ckParam = urlParams.get('ck')
-
     let data = {}
 
     switch (person[ckParam]) {
@@ -275,30 +286,50 @@
             data = {
                 name: 'Ч***** Х****** Р*********',
                 date: '02.06.1999',
-                passport: '40** ***821'
+                passport: '40** ***821',
+                unrz: '9780 0000 2492 2201',
+                date_valid_until: '30.06.2022',
             }
             break;
         case 'A':
             data = {
-                name: 'И**** Н********* К*****',
+                name: 'А******** Н****** С********',
                 date: '27.05.1999',
-                passport: '40** ***821'
+                passport: '80** ***093',
+                unrz: '9780 0000 2492 2201',
+                date_valid_until: '30.08.2022',
+            }
+            break;
+        case 'D':
+            data = {
+                name: 'Д**** А***** Ф*********',
+                date: '05.01.1997',
+                passport: '80** ***947',
+                unrz: '9561 0000 2598 2314',
+                date_valid_until: '15.09.2022',
             }
             break;
         default:
             data = {
                 name: 'А******** Н****** С********',
                 date: '27.05.1999',
-                passport: '40** ***432'
+                passport: '80** ***093',
+                unrz: '9780 0000 2492 2201',
+                date_valid_until: '30.08.2022',
             }
             break;
     }
-    const nodeName = document.querySelector('.replace__name'),
+    const
+        nodeName = document.querySelector('.replace__name'),
         nodeDate = document.querySelector('.replace__date'),
-        nodePassport = document.querySelector('.replace__passport')
+        nodePassport = document.querySelector('.replace__passport'),
+        nodeUnrz = document.querySelector('.unrz'),
+        nodeDateValidUntil = document.querySelector('.date_valid_until');
 
-    nodeName.innerHTML = data.name
-    nodeDate.innerHTML = data.date
-    nodePassport.innerHTML = data.passport
+    nodeName.innerHTML = data.name;
+    nodeDate.innerHTML = data.date;
+    nodePassport.innerHTML = data.passport;
+    nodeUnrz.innerHTML = data.unrz;
+    nodeDateValidUntil.innerHTML = data.date_valid_until;
 </script>
 </html>
